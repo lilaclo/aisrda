@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 資料流經典四階段 (AI Data Pipeline)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: {
+                            50: '#fdf2f2',
+                            100: '#fde8e8',
+                            600: '#9b1c1c',
+                            800: '#800000', /* 主母版深紅 */
+                            900: '#610000',
+                        },
+                        navy: {
+                            800: '#003366', /* 輔助深藍 */
+                            900: '#002244',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 平滑過渡與陰影 */
+        .step-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(128, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans min-h-screen flex items-center justify-center p-6 md:p-12">
+
+    <div class="max-w-6xl w-full bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+        <!-- 頂部與 PPT 一致的裝飾條 -->
+        <div class="h-2 w-full bg-maroon-800"></div>
+
+        <div class="p-8 md:p-12">
+            <!-- 標頭 -->
+            <div class="text-center mb-12">
+                <span class="text-sm font-bold tracking-widest text-navy-800 uppercase bg-blue-50 px-3 py-1 rounded-full">技術架構圖</span>
+                <h1 class="text-3xl md:text-4xl font-bold text-maroon-800 mt-3 mb-4">經典 AI 資料流四階段</h1>
+                <p class="text-slate-500 text-lg max-w-2xl mx-auto">從原始數據到模型部署的完整生命週期與處理工序</p>
+            </div>
+
+            <!-- 流程圖主體 (響應式：大螢幕橫向，小螢幕縱向) -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative">
+                
+                <!-- 背景連接線 (僅在寬螢幕顯示) -->
+                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -translate-y-12 z-0"></div>
+
+                <!-- 階段 1 -->
+                <div class="step-card bg-white border-2 border-slate-100 hover:border-maroon-800/40 rounded-xl p-6 relative z-10">
+                    <div class="absolute -top-5 left-6 bg-maroon-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        1
+                    </div>
+                    <!-- 圖示與標題 -->
+                    <div class="flex flex-col items-center text-center mt-4 mb-6">
+                        <div class="w-16 h-16 bg-maroon-50 rounded-full flex items-center justify-center mb-4 text-maroon-800 text-2xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-800">資料源與資料庫</h3>
+                        <span class="text-xs text-slate-400 mt-1 font-mono">Data Sources</span>
+                    </div>
+                    <!-- 詳細資訊 -->
+                    <div class="space-y-4 border-t border-slate-100 pt-4">
+                        <div>
+                            <span class="text-xs font-semibold text-maroon-800 bg-maroon-50 px-2 py-0.5 rounded">系統起點</span>
+                            <p class="text-sm text-slate-600 mt-1.5">作為 AI 運算的起點，負責儲存所有原始數據結構。</p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500">常見類型</span>
+                            <ul class="text-sm text-slate-500 space-y-1 mt-1.5 list-disc list-inside">
+                                <li>關聯式資料庫</li>
+                                <li>資料湖 (Data Lake)</li>
+                                <li>NoSQL / API 串流</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 階段 2 -->
+                <div class="step-card bg-white border-2 border-slate-100 hover:border-maroon-800/40 rounded-xl p-6 relative z-10">
+                    <div class="absolute -top-5 left-6 bg-maroon-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        2
+                    </div>
+                    <!-- 圖示與標題 -->
+                    <div class="flex flex-col items-center text-center mt-4 mb-6">
+                        <div class="w-16 h-16 bg-maroon-50 rounded-full flex items-center justify-center mb-4 text-maroon-800 text-2xl">
+                            <i class="fa-solid fa-broom-fluid"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-800">資料前處理</h3>
+                        <span class="text-xs text-slate-400 mt-1 font-mono">Preprocessing</span>
+                    </div>
+                    <!-- 詳細資訊 -->
+                    <div class="space-y-4 border-t border-slate-100 pt-4">
+                        <div>
+                            <span class="text-xs font-semibold text-maroon-800 bg-maroon-50 px-2 py-0.5 rounded">資料清理</span>
+                            <p class="text-sm text-slate-600 mt-1.5">處理缺失值、去除重複數據、以及異常值檢測。</p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500">資料轉換</span>
+                            <p class="text-sm text-slate-600 mt-1">類別型資料編碼 (One-Hot) 與特徵縮放。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 階段 3 -->
+                <div class="step-card bg-white border-2 border-slate-100 hover:border-maroon-800/40 rounded-xl p-6 relative z-10">
+                    <div class="absolute -top-5 left-6 bg-maroon-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        3
+                    </div>
+                    <!-- 圖示與標題 -->
+                    <div class="flex flex-col items-center text-center mt-4 mb-6">
+                        <div class="w-16 h-16 bg-maroon-50 rounded-full flex items-center justify-center mb-4 text-maroon-800 text-2xl">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-800">特徵工程</h3>
+                        <span class="text-xs text-slate-400 mt-1 font-mono">Feature Eng.</span>
+                    </div>
+                    <!-- 詳細資訊 -->
+                    <div class="space-y-4 border-t border-slate-100 pt-4">
+                        <div>
+                            <span class="text-xs font-semibold text-maroon-800 bg-maroon-50 px-2 py-0.5 rounded">提取與選擇</span>
+                            <p class="text-sm text-slate-600 mt-1.5">從乾淨資料中提取高價值欄位，優化模型效能。</p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500">降維處理</span>
+                            <p class="text-sm text-slate-600 mt-1">降低演算法運算複雜度，保留關鍵特徵訊息。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 階段 4 -->
+                <div class="step-card bg-white border-2 border-slate-100 hover:border-maroon-800/40 rounded-xl p-6 relative z-10">
+                    <div class="absolute -top-5 left-6 bg-maroon-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-md">
+                        4
+                    </div>
+                    <!-- 圖示與標題 -->
+                    <div class="flex flex-col items-center text-center mt-4 mb-6">
+                        <div class="w-16 h-16 bg-maroon-50 rounded-full flex items-center justify-center mb-4 text-maroon-800 text-2xl">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-800">模型訓練與部署</h3>
+                        <span class="text-xs text-slate-400 mt-1 font-mono">Train & Deploy</span>
+                    </div>
+                    <!-- 詳細資訊 -->
+                    <div class="space-y-4 border-t border-slate-100 pt-4">
+                        <div>
+                            <span class="text-xs font-semibold text-maroon-800 bg-maroon-50 px-2 py-0.5 rounded">切分與餵入</span>
+                            <p class="text-sm text-slate-600 mt-1.5">將特徵切分為訓練集與測試集，餵入演算法。</p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500">模型應用</span>
+                            <p class="text-sm text-slate-600 mt-1">進入機器學習、深度學習或主權大語言模型訓練。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 底部署名與 PPT 機構風格對齊 -->
+            <div class="mt-12 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
+                <div>臺灣實證資料推動與加值計畫 (NSTC LTESD) ‧ 技術白皮書</div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-maroon-800"></span>
+                    <span>主權 AI 數據流程基準架構</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
